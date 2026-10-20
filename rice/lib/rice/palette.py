@@ -78,7 +78,7 @@ HUES = {"red": 25, "yellow": 90, "green": 145, "cyan": 195, "blue": 255, "magent
 
 # rice's semantic roles. Documented in docs/themes.md.
 UI_KEYS = [
-    "ui_surface", "ui_surface_alt", "ui_border", "ui_dim", "ui_faint",
+    "ui_surface", "ui_surface_alt", "ui_border", "ui_text", "ui_dim", "ui_faint",
     "ui_success", "ui_danger", "ui_warning", "ui_info", "ui_on_accent", "ui_accent_soft",
     "ui_inverse", "ui_inverse_fg", "ui_inverse_dim", "ui_inverse_accent", "ui_inverse_on_accent",
     "ui_shade",
@@ -240,6 +240,8 @@ def _derive_ui(c):
     put("ui_surface", surface)
     put("ui_surface_alt", cm.mix(c["ui_surface"], fg, "7%"))
     put("ui_border", cm.mix(bg, fg, "14%"))
+    # App text (T3 Code's): plain white on a dark theme rather than its tinted foreground.
+    put("ui_text", fg if light else "#ffffff")
 
     # dark_foreground is the dimmer text on a dark theme, but on a light theme it
     # can be the darker (stronger) one: only use it if it sits between fg and bg.

@@ -70,6 +70,15 @@ class Templates(unittest.TestCase):
                 for role, value in colors.items():
                     self.assertRegex(value, r"^#[0-9A-Fa-f]{6}$", role)
 
+    def test_t3code_text_is_white_on_dark_themes(self):
+        for name, text in PALETTES.items():
+            with self.subTest(palette=name):
+                theme = json.loads(rendered(text)["t3code.json"])
+                fg = palette.resolve(palette.parse(text))["foreground"]
+                want = "#ffffff" if theme["appearance"] == "dark" else fg
+                for role in ("text", "messageForeground", "sidebarForeground"):
+                    self.assertEqual(theme["colors"][role].lower(), want.lower(), role)
+
     def test_golden(self):
         outputs = rendered(PALETTES["sample"])
         if os.environ.get("RICE_UPDATE_GOLDEN") == "1":

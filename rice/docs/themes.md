@@ -45,7 +45,7 @@ derived from the palette, and you can pin any of them:
 | key | used for |
 | --- | --- |
 | `ui_surface`, `ui_surface_alt`, `ui_border` | cards, bar islands, popovers |
-| `ui_dim`, `ui_faint` | secondary and disabled text |
+| `ui_text`, `ui_dim`, `ui_faint` | app text (white on a dark theme), secondary and disabled text |
 | `ui_on_accent`, `ui_accent_soft` | text on the accent, tinted selections |
 | `ui_success`, `ui_warning`, `ui_danger`, `ui_info` | status colours |
 | `ui_inverse`, `ui_inverse_fg`, `ui_inverse_dim`, `ui_inverse_accent` | the bar's centre capsule |
