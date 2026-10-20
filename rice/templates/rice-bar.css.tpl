@@ -105,6 +105,55 @@
   color: {{ ui_inverse_fg }} !important;
 }
 
+/* ---- notifications: the countdown and the card ------------------------------- */
+
+#panelBox #panel.rice-bar .rice-capsule .rice-timer,
+.rice-card .rice-timer {
+  background-color: rgba({{ ui_inverse_fg_rgb }}, 0.10) !important;
+}
+
+#panelBox #panel.rice-bar .rice-capsule .rice-timer-fill,
+.rice-card .rice-timer-fill {
+  background-color: {{ ui_inverse_accent }} !important;
+}
+
+.rice-card {
+  color: {{ ui_inverse_fg }} !important;
+  background-color: {{ ui_inverse }} !important;
+  box-shadow: 0 8px 24px {{ ui_shade }} !important;
+}
+
+.rice-card .rice-card-icon,
+.rice-card .rice-card-app,
+.rice-card .rice-card-title,
+.rice-card .rice-card-body {
+  color: {{ ui_inverse_fg }} !important;
+}
+
+.rice-card .rice-card-paused,
+.rice-card .rice-card-close StIcon {
+  color: {{ ui_inverse_dim }} !important;
+}
+
+.rice-card .rice-card-close:hover,
+.rice-card .rice-card-action {
+  color: {{ ui_inverse_fg }} !important;
+  background-color: rgba({{ ui_inverse_fg_rgb }}, 0.08) !important;
+}
+
+.rice-card .rice-card-action:hover {
+  background-color: rgba({{ ui_inverse_fg_rgb }}, 0.14) !important;
+}
+
+.rice-card .rice-card-action.rice-card-primary {
+  color: {{ ui_inverse_on_accent }} !important;
+  background-color: {{ ui_inverse_accent }} !important;
+}
+
+.rice-card .rice-card-action.rice-card-primary:hover {
+  background-color: {{ mix ui_inverse_accent ui_inverse_fg 12% }} !important;
+}
+
 /* ---- pickers ------------------------------------------------------------------- */
 
 .rice-picker {
