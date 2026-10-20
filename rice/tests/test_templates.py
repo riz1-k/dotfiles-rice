@@ -13,6 +13,19 @@ TEMPLATES = helpers.ROOT / "templates"
 GOLDEN = helpers.FIXTURES / "golden"
 LEFTOVER = re.compile(r"\{\{\s*[a-z][a-z0-9_]*(\s+[^}]*)?\s*\}\}")
 EXTRA = {"rice_theme": "sample", "rice_theme_name": "Sample"}
+T3CODE_ROLES = """
+canvas chrome toolbar toolbarForeground toolbarBorder toolbarControl toolbarControlForeground
+toolbarControlHover surface surfaceRaised surfaceOverlay text textMuted border input focus
+accent accentForeground secondary secondaryForeground muted mutedForeground placeholder
+secondaryLabel iconMuted error errorForeground errorSurface warning warningForeground
+warningSurface update updateForeground updateSurface accentSurface accentSurfaceForeground
+messageSurface messageForeground messageAction messageActionForeground messageActionHover
+codeBackground codeForeground searchMatchBackground searchMatchForeground
+searchMatchActiveBackground searchMatchActiveForeground sidebar sidebarForeground
+sidebarMutedForeground sidebarControlSurface sidebarRowHover sidebarRowActive
+sidebarRowSelected sidebarBorder terminalBackground terminalForeground terminalCursor
+terminalSelection terminalScrollbar terminalScrollbarHover
+"""
 
 PALETTES = {
     "sample": (helpers.FIXTURES / "sample-colors.toml").read_text(),
@@ -44,6 +57,18 @@ class Templates(unittest.TestCase):
                         json.loads(data)
                     elif out.endswith(".toml"):
                         tomllib.loads(data)
+
+    def test_t3code_sets_every_role(self):
+        # T3 Code fills any role a seeded theme leaves out from its own generator, which
+        # tints every surface with the accent's hue (and the send button 50 degrees off it).
+        # So the template sets them all. The list is T3 Code's own, as of October 2026.
+        roles = set(T3CODE_ROLES.split())
+        for name, text in PALETTES.items():
+            with self.subTest(palette=name):
+                colors = json.loads(rendered(text)["t3code.json"])["colors"]
+                self.assertEqual(set(colors), roles)
+                for role, value in colors.items():
+                    self.assertRegex(value, r"^#[0-9A-Fa-f]{6}$", role)
 
     def test_golden(self):
         outputs = rendered(PALETTES["sample"])
