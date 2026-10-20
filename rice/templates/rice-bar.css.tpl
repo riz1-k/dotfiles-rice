@@ -51,6 +51,18 @@
   background-color: {{ ui_inverse }} !important;
 }
 
+/* Icons and labels another extension puts in the capsule (notification-icons' app
+   icons and unread count) read on it, not in the islands' foreground, which it hides. */
+#panelBox #panel.rice-bar .rice-capsule StIcon,
+#panelBox #panel.rice-bar .rice-capsule StLabel {
+  color: {{ ui_inverse_fg }} !important;
+}
+
+#panelBox #panel.rice-bar .rice-capsule .notification-count {
+  color: {{ ui_inverse_on_accent }} !important;
+  background-color: {{ ui_inverse_accent }} !important;
+}
+
 #panelBox #panel.rice-bar .panel-button.rice-capsule:hover,
 #panelBox #panel.rice-bar .panel-button.rice-capsule:focus {
   box-shadow: none !important;
